@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.DataBase", "Infra.DataBase\Infra.DataBase.csproj", "{2C0E70C4-1370-43C2-BA6C-C78C0FACFE96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.DataBase", "Infra.DataBase\Infra.DataBase.csproj", "{2C0E70C4-1370-43C2-BA6C-C78C0FACFE96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.IoC", "Infra.IoC\Infra.IoC.csproj", "{56C8CB9B-B703-4290-AD78-61C91D3EEC95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.IoC", "Infra.IoC\Infra.IoC.csproj", "{56C8CB9B-B703-4290-AD78-61C91D3EEC95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{DDCD295E-2404-41C6-8E35-49ABA0FBDDDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{DDCD295E-2404-41C6-8E35-49ABA0FBDDDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{4DAE8D22-16AB-4D34-AB39-F2F4D7FA5716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{4DAE8D22-16AB-4D34-AB39-F2F4D7FA5716}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{8B6B69C6-21DD-43A2-A32A-59F8B3FC2000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4DAE8D22-16AB-4D34-AB39-F2F4D7FA5716}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DAE8D22-16AB-4D34-AB39-F2F4D7FA5716}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DAE8D22-16AB-4D34-AB39-F2F4D7FA5716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B6B69C6-21DD-43A2-A32A-59F8B3FC2000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B6B69C6-21DD-43A2-A32A-59F8B3FC2000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B6B69C6-21DD-43A2-A32A-59F8B3FC2000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B6B69C6-21DD-43A2-A32A-59F8B3FC2000}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
