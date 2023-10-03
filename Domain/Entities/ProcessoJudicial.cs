@@ -13,7 +13,7 @@ public class ProcessoJudicial : Entity
     public int AdvogadoId { get; set; }
 
     public  Cliente? Parte { get; set; }
-    public Advogado? Responsavel { get; set; }
+    public Advogado? AdvogadoResponsavel { get; set; }
     public IEnumerable<Documento>? Documentos { get; set; }
 
     public ProcessoJudicial(string numeroProcesso, string tema, double valorCausa, DateTime dataDeAbertura)

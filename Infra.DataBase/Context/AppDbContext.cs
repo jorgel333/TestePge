@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.DataBase.Context;
 
@@ -6,14 +7,10 @@ public class AppDbContext : DbContext
 {
 	public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
 	{
-		
 	}
-    public DbSet<Admin> Administrators { get; set; }
-    public DbSet<User> CommonUsers { get; set; }
-    public DbSet<Movie> Movies { get; set; }
-    public DbSet<AssessmentRecord> AssessmentRecords { get; set; }
-    public DbSet<Casts> Casts { get; set; }
-    public DbSet<CastActMovies> CastActMovies { get; set; }
-    public DbSet<CastDirectMovies> CastDirectMovies { get; set; }
-    public DbSet<Genre> Genres { get; set; }
+    public DbSet<ProcessoJudicial> ProcessosJudiciais { get; set; }
+    public DbSet<Advogado> Advogados { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
+    public DbSet<AdvogadoCliente> AdvogadoCliente { get; set; }
+    public DbSet<Documento> Documentos { get; set; }
 }

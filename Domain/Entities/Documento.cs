@@ -1,10 +1,14 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Entities.Abstract;
 
-public class Documento
+namespace Domain.Entities;
+
+public class Documento : Entity
 {
     public string? Nome { get; set; } 
     public string? Caminho { get; set; } 
     public string? Extensao { get; set; }
+
+    public int ProcessoId { get; set; }
 
     public ProcessoJudicial? Processo { get; set; }
 
