@@ -8,4 +8,5 @@ public interface IClienteRepository
     void Criar(Cliente cliente);
     void Excluir(Cliente cliente);
     Task<Cliente?> BuscarPorId(int id, CancellationToken cancellationToken);
+    Task<bool> CpfUnico(string cpf, CancellationToken cancellatioToken);
 }

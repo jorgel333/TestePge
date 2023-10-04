@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class Advogado : Pessoa
+public class Advogado : Usuario
 {
     public string? Oab { get; private set; }
 
@@ -11,6 +11,12 @@ public class Advogado : Pessoa
 
     public Advogado(string nome, string cpf, string oab) : base(nome, cpf)
     {
+        Oab = oab;
+    }
+
+    public void AtualizarDados(string nome, string cpf, string oab)
+    {
+        AtualizarDados(nome, cpf);
         Oab = oab;
     }
 }

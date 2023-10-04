@@ -14,6 +14,12 @@ public class ClienteRepository : IClienteRepository
         _context = context;
     }
 
+    public void Criar(Cliente cliente)
+        => _context.Clientes.Add(cliente);
+
+    public void Excluir(Cliente cliente)
+        => _context.Clientes.Remove(cliente);
+
     public void Atualizar(Cliente cliente)
         => _context.Clientes.Update(cliente);
 
@@ -22,9 +28,6 @@ public class ClienteRepository : IClienteRepository
         .Include(x => x.Processos!).ThenInclude(x => x.NumeroProcesso)
         .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
-    public void Criar(Cliente cliente)
-        => _context.Clientes.Add(cliente);
-
-    public void Excluir(Cliente cliente)
-        => _context.Clientes.Remove(cliente);
+    public async Task<bool> CpfUnico(string cpf, CancellationToken cancellatioToken)
+           => await _context.Advogados.AnyAsync(adm => adm.Cpf! == cpf, cancellatioToken) is false;
 }

@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class Cliente : Pessoa
+public class Cliente : Usuario
 {
     public IEnumerable<ProcessoJudicial>? Processos { get; set; }
     public IEnumerable<AdvogadoCliente>? Advogados { get; set; }

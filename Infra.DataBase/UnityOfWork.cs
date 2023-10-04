@@ -1,7 +1,7 @@
 ﻿using Domain.Interfaces;
 using Infra.DataBase.Context;
 
-namespace Infra.DataBase.UnityOfWork;
+namespace Infra.DataBase;
 
 public class UnityOfWork : IUnityOfWork
 {
@@ -16,7 +16,7 @@ public class UnityOfWork : IUnityOfWork
     {
         await _context.SaveChangesAsync(cancellationToken);
     }
-    
+
     public void Dispose()
     {
         _context.Dispose();

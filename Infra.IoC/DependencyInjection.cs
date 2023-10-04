@@ -1,4 +1,5 @@
-﻿using Infra.DataBase.Context;
+﻿using Infra.DataBase;
+using Infra.DataBase.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,8 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DbConnection"),
             b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
+
+        services.AddRepositories();
 
         return services;
     }
