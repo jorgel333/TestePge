@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities.Abstract;
 
-public class Entity 
+public abstract class Entity 
 {
     public int Id { get; protected set; }
 }

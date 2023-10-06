@@ -19,7 +19,7 @@ public class ExcluirProcessoJudicialCommandHandler : IRequestHandler<ExcluirProc
 
     public async Task<Result> Handle(ExcluirProcessoJudicialCommand request, CancellationToken cancellationToken)
     {
-        var processo = await _processoRepository.BuscarPorId(request.Id, cancellationToken);
+        var processo = await _processoRepository.BuscarProcesso(request.NumeroProcesso, cancellationToken);
 
         if (processo is null)
             return Result.Fail(new ApplicationNotFoundError("Processo não encontrado"));

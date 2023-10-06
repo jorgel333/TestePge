@@ -8,17 +8,14 @@ public class ProcessoJudicialConfiguration : IEntityTypeConfiguration<ProcessoJu
 {
     public void Configure(EntityTypeBuilder<ProcessoJudicial> builder)
     {
+        builder.HasKey(p => p .NumeroProcesso);
 
-        builder.HasKey(p => p.Id);
-
-        builder.Property(p => p.NumeroProcesso).IsRequired();
-
-        builder.Property(j => j.Tema).HasMaxLength(400);
+        builder.Property(j => j.Tema).HasMaxLength(100);
 
         builder.Property(j => j.ValorCausa).HasPrecision(8, 2);
 
-        builder.HasOne(j => j.Parte).WithMany(j => j.Processos);
+        builder.HasOne(j => j.Parte).WithMany(j => j.Processos).HasForeignKey(j => j.ClienteId);
 
-        builder.HasOne(j => j.AdvogadoResponsavel).WithMany(j => j.Processos);
+        builder.HasOne(j => j.AdvogadoResponsavel).WithMany(j => j.Processos).HasForeignKey(j => j.AdvogadoId);
     }
 }

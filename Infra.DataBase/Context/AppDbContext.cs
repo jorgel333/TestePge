@@ -11,7 +11,6 @@ public class AppDbContext : DbContext
     public DbSet<ProcessoJudicial> ProcessosJudiciais { get; set; }
     public DbSet<Advogado> Advogados { get; set; }
     public DbSet<Cliente> Clientes { get; set; }
-    public DbSet<AdvogadoCliente> AdvogadoCliente { get; set; }
     public DbSet<Documento> Documentos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -18,7 +18,7 @@ namespace Infra.DataBase.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Oab = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: false),
-                    Cpf = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false)
+                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,7 +32,7 @@ namespace Infra.DataBase.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: false),
-                    Cpf = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false)
+                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,46 +40,19 @@ namespace Infra.DataBase.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AdvogadoCliente",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
-                    AdvogadoId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AdvogadoCliente", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AdvogadoCliente_Advogados_AdvogadoId",
-                        column: x => x.AdvogadoId,
-                        principalTable: "Advogados",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AdvogadoCliente_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProcessosJudiciais",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    NumeroProcesso = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NumeroProcesso = table.Column<int>(type: "int", nullable: false),
-                    Tema = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
+                    Tema = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     ValorCausa = table.Column<double>(type: "float(8)", precision: 8, scale: 2, nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     AdvogadoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProcessosJudiciais", x => x.Id);
+                    table.PrimaryKey("PK_ProcessosJudiciais", x => x.NumeroProcesso);
                     table.ForeignKey(
                         name: "FK_ProcessosJudiciais_Advogados_AdvogadoId",
                         column: x => x.AdvogadoId,
@@ -102,29 +75,19 @@ namespace Infra.DataBase.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Caminho = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Extensao = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ProcessoId = table.Column<int>(type: "int", nullable: false)
+                    Tipo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NumeroProcesso = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Documentos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Documentos_ProcessosJudiciais_ProcessoId",
-                        column: x => x.ProcessoId,
+                        name: "FK_Documentos_ProcessosJudiciais_NumeroProcesso",
+                        column: x => x.NumeroProcesso,
                         principalTable: "ProcessosJudiciais",
-                        principalColumn: "Id",
+                        principalColumn: "NumeroProcesso",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AdvogadoCliente_AdvogadoId",
-                table: "AdvogadoCliente",
-                column: "AdvogadoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AdvogadoCliente_ClienteId",
-                table: "AdvogadoCliente",
-                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Advogados_Cpf",
@@ -145,9 +108,9 @@ namespace Infra.DataBase.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Documentos_ProcessoId",
+                name: "IX_Documentos_NumeroProcesso",
                 table: "Documentos",
-                column: "ProcessoId");
+                column: "NumeroProcesso");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProcessosJudiciais_AdvogadoId",
@@ -163,9 +126,6 @@ namespace Infra.DataBase.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AdvogadoCliente");
-
             migrationBuilder.DropTable(
                 name: "Documentos");
 

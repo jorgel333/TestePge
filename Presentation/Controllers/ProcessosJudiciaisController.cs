@@ -1,5 +1,7 @@
 ﻿using Application.Features.Processos.BuscarDetalhes;
 using Application.Features.Processos.Cadastrar;
+using Application.Features.Processos.Editar;
+using Application.Features.Processos.Excluir;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +20,7 @@ namespace Presentation.Controllers
             _sender = sender;
         }
 
-        [HttpGet("{id}:int")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> BuscarDetalhes(int id, CancellationToken cancellationToken)
         {
             var request = new BuscarDetalhesProcessoQuery(id);
@@ -27,11 +29,26 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CriarProcesso(CriarProcessoJudicialCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Cadastrar(CriarProcessoJudicialCommand request, CancellationToken cancellationToken)
         {
             var result = await _sender.Send(request);
             return SendResponseService.SendResponse(result);
         }
 
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Atualizar(int id, EditarProcessoCommandRequest request, CancellationToken cancellationToken)
+        {
+            var command = new EditarProcessoCommand(id, request.Tema, request.ValorCausa);
+            var result = await _sender.Send(command, cancellationToken);
+            return SendResponseService.SendResponse(result);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Excluir(int id, CancellationToken cancellationToken)
+        {
+            var command = new ExcluirProcessoJudicialCommand(id);
+            var result = await _sender.Send(command, cancellationToken);
+            return SendResponseService.SendResponse(result);
+        }
     }
 }

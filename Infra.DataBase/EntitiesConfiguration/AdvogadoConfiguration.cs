@@ -16,7 +16,7 @@ public class AdvogadoConfiguration : IEntityTypeConfiguration<Advogado>
 
         builder.Property(c => c.Nome).IsRequired().HasMaxLength(120);
 
-        builder.Property(c => c.Cpf).IsRequired().HasMaxLength(12);
+        builder.Property(c => c.Cpf).IsRequired().HasMaxLength(11);
 
         builder.Property(c => c.Oab).IsRequired().HasMaxLength(15);
     }

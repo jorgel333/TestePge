@@ -14,8 +14,8 @@ public class DocumentoConfiguration : IEntityTypeConfiguration<Documento>
 
         builder.Property(d => d.Caminho).IsRequired().HasMaxLength(200);
 
-        builder.Property(d => d.Extensao).IsRequired().HasMaxLength(20);
+        builder.Property(d => d.Tipo).IsRequired().HasMaxLength(50);
 
-        builder.HasOne(d => d.Processo).WithMany(d => d.Documentos).HasForeignKey(d => d.ProcessoId);
+        builder.HasOne(d => d.Processo).WithMany(d => d.Documentos).HasForeignKey(d => d.NumeroProcesso);
     }
 }

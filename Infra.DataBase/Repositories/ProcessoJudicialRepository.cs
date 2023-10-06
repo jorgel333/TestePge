@@ -22,13 +22,13 @@ public class ProcessoJudicialRepository : IProcessoJudicialRepository
     public void Excluir(ProcessoJudicial processo)
         => _context.Remove(processo);
 
-    public async Task<ProcessoJudicial?> BuscarDetalhes(int numeroProcesso, CancellationToken cancellationToken)
+    public async Task<ProcessoJudicial?> BuscarProcessoDetalhes(int numeroProcesso, CancellationToken cancellationToken)
         => await _context.ProcessosJudiciais.Include(x => x.Documentos!)
         .Include(x => x.AdvogadoResponsavel)
         .Include(x => x.Parte)
         .SingleOrDefaultAsync(x => x.NumeroProcesso == numeroProcesso, cancellationToken);
-    public async Task<ProcessoJudicial?> BuscarPorId(int id, CancellationToken cancellationToken)
-        => await _context.ProcessosJudiciais.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+    public async Task<ProcessoJudicial?> BuscarProcesso(int numeroProceesso, CancellationToken cancellationToken)
+        => await _context.ProcessosJudiciais.SingleOrDefaultAsync(x => x.NumeroProcesso == numeroProceesso, cancellationToken);
 
     public async Task<ProcessoJudicial?> BuscarPorNumeroDoProcesso(int numeroProcesso, CancellationToken cancellationToken)
         => await _context.ProcessosJudiciais

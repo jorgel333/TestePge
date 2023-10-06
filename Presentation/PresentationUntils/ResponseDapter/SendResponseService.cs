@@ -17,7 +17,7 @@ public static class SendResponseService
             stream.CopyTo(memory);
             memory.Position = 0;
 
-            return new FileStreamResult(memory, result.Value.Documento.Extensao!)
+            return new FileStreamResult(memory, result.Value.Documento.Tipo!)
             {
                 FileDownloadName = result.Value.Documento.Nome
             };

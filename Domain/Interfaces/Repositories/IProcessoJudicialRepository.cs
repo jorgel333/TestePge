@@ -8,7 +8,7 @@ public interface IProcessoJudicialRepository
     void Criar(ProcessoJudicial processo);
     void Excluir(ProcessoJudicial processo);
     Task<IEnumerable<ProcessoJudicial>> GetAll(CancellationToken cancellationToken);
-    Task<ProcessoJudicial?> BuscarPorId(int id, CancellationToken cancellationToken);
+    Task<ProcessoJudicial?> BuscarProcesso(int numeroProcesso, CancellationToken cancellationToken);
     Task<ProcessoJudicial?> BuscarPorNumeroDoProcesso(int numeroProcesso, CancellationToken cancellationToken);
-    Task<ProcessoJudicial?> BuscarDetalhes(int id, CancellationToken cancellationToken);
+    Task<ProcessoJudicial?> BuscarProcessoDetalhes(int id, CancellationToken cancellationToken);
 }

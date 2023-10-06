@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.Features.Processos.Excluir;
 
-public record ExcluirProcessoJudicialCommand(int Id) : IRequest<Result>;
+public record ExcluirProcessoJudicialCommand(int NumeroProcesso) : IRequest<Result>;

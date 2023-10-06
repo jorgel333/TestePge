@@ -2,7 +2,6 @@
 using Domain.Interfaces.Repositories;
 using FluentResults;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Documentos.Baixar;
 

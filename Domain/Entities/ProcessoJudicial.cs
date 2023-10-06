@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class ProcessoJudicial : Entity
+public class ProcessoJudicial
 {
     public int NumeroProcesso { get; private set; }
     public string? Tema { get; private set; }
@@ -14,6 +14,7 @@ public class ProcessoJudicial : Entity
     public  Cliente? Parte { get; set; }
     public Advogado? AdvogadoResponsavel { get; set; }
     public IEnumerable<Documento>? Documentos { get; set; }
+
 
     public ProcessoJudicial(string tema, double valorCausa)
     {

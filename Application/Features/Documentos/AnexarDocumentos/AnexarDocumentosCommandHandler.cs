@@ -29,10 +29,7 @@ public class AnexarDocumentosCommandHandler : IRequestHandler<AnexarDocumentosCo
                 {
                     await formFile.CopyToAsync(stream, cancellationToken);
 
-                    var documento = new Documento(formFile.FileName, caminho, formFile.ContentType)
-                    {
-                        ProcessoId = request.Id
-                    };
+                    var documento = new Documento(formFile.FileName, caminho, formFile.ContentType, request.NumeroProcesso);
                     _documentoRepository.Anexar(documento);
                 } 
             }

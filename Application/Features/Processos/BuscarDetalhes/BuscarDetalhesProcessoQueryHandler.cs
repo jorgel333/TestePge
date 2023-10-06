@@ -2,6 +2,7 @@
 using Application.Erros;
 using FluentResults;
 using MediatR;
+using Domain.Entities;
 
 namespace Application.Features.Processos.BuscarDetalhes;
 
@@ -16,7 +17,7 @@ public class BuscarDetalhesProcessoQueryHandler : IRequestHandler<BuscarDetalhes
 
     public async Task<Result<BuscarDetalhesProcessoQueryResponse>> Handle(BuscarDetalhesProcessoQuery request, CancellationToken cancellationToken)
     {
-        var processo = await _processoRepository.BuscarDetalhes(request.NumeroProcesso, cancellationToken);
+        var processo = await _processoRepository.BuscarProcessoDetalhes(request.NumeroProcesso, cancellationToken);
         
         if (processo is null)
             return Result.Fail(new ApplicationNotFoundError("Processo não encontrado"));
@@ -26,7 +27,7 @@ public class BuscarDetalhesProcessoQueryHandler : IRequestHandler<BuscarDetalhes
             processo.ValorCausa,
             processo.AdvogadoResponsavel!.Nome!,
             processo.Parte!.Nome!,
-            processo.Documentos!.Select(x => x.Nome!));
+            processo.Documentos!.Select(x => x.Nome!) ?? Enumerable.Empty<string>());
         
         return Result.Ok(response);
     }

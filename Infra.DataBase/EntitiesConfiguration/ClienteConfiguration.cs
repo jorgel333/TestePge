@@ -14,6 +14,6 @@ public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
 
         builder.Property(c => c.Nome).IsRequired().HasMaxLength(120);
 
-        builder.Property(c => c.Cpf).IsRequired().HasMaxLength(12);
+        builder.Property(c => c.Cpf).IsRequired().HasMaxLength(11);
     }
 }

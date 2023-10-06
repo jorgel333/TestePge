@@ -17,11 +17,11 @@ public class DocumentoRepository : IDocumentoRepository
     public void Anexar(Documento documentos)
         => _context.Add(documentos);
 
-    public void Desanexar(IEnumerable<Documento> documentos)
-        => _context.Documentos.RemoveRange(documentos);
+    public void Desanexar(Documento documentos)
+        => _context.Documentos.Remove(documentos);
 
-    public async Task<IEnumerable<Documento>> BuscarDocumentos(int id, CancellationToken cancellationToken)
-        => await _context.Documentos.Where(x => x.ProcessoId == id).ToListAsync(cancellationToken);
+    public async Task<IEnumerable<Documento>> BuscarDocumentos(int NumeroProcecsso, CancellationToken cancellationToken)
+        => await _context.Documentos.Where(x => x.NumeroProcesso == NumeroProcecsso).ToListAsync(cancellationToken);
 
     public async Task<Documento?> BuscarDocumento(int id, CancellationToken cancellationToken)
         => await _context.Documentos.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);

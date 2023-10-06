@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DataBase.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231005173049_initial")]
+    [Migration("20231006152132_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -34,8 +34,8 @@ namespace Infra.DataBase.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -58,29 +58,6 @@ namespace Infra.DataBase.Migrations
                     b.ToTable("Advogados");
                 });
 
-            modelBuilder.Entity("Domain.Entities.AdvogadoCliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AdvogadoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdvogadoId");
-
-                    b.HasIndex("ClienteId");
-
-                    b.ToTable("AdvogadoCliente");
-                });
-
             modelBuilder.Entity("Domain.Entities.Cliente", b =>
                 {
                     b.Property<int>("Id")
@@ -91,8 +68,8 @@ namespace Infra.DataBase.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -120,41 +97,38 @@ namespace Infra.DataBase.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Extensao")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("ProcessoId")
+                    b.Property<int>("NumeroProcesso")
                         .HasColumnType("int");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProcessoId");
+                    b.HasIndex("NumeroProcesso");
 
                     b.ToTable("Documentos");
                 });
 
             modelBuilder.Entity("Domain.Entities.ProcessoJudicial", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("NumeroProcesso")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NumeroProcesso"));
 
                     b.Property<int>("AdvogadoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumeroProcesso")
                         .HasColumnType("int");
 
                     b.Property<string>("Tema")
@@ -165,7 +139,7 @@ namespace Infra.DataBase.Migrations
                         .HasPrecision(8, 2)
                         .HasColumnType("float(8)");
 
-                    b.HasKey("Id");
+                    b.HasKey("NumeroProcesso");
 
                     b.HasIndex("AdvogadoId");
 
@@ -174,30 +148,11 @@ namespace Infra.DataBase.Migrations
                     b.ToTable("ProcessosJudiciais");
                 });
 
-            modelBuilder.Entity("Domain.Entities.AdvogadoCliente", b =>
-                {
-                    b.HasOne("Domain.Entities.Advogado", "Advogado")
-                        .WithMany("Clientes")
-                        .HasForeignKey("AdvogadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Cliente", "Cliente")
-                        .WithMany("Advogados")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Advogado");
-
-                    b.Navigation("Cliente");
-                });
-
             modelBuilder.Entity("Domain.Entities.Documento", b =>
                 {
                     b.HasOne("Domain.Entities.ProcessoJudicial", "Processo")
                         .WithMany("Documentos")
-                        .HasForeignKey("ProcessoId")
+                        .HasForeignKey("NumeroProcesso")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -225,15 +180,11 @@ namespace Infra.DataBase.Migrations
 
             modelBuilder.Entity("Domain.Entities.Advogado", b =>
                 {
-                    b.Navigation("Clientes");
-
                     b.Navigation("Processos");
                 });
 
             modelBuilder.Entity("Domain.Entities.Cliente", b =>
                 {
-                    b.Navigation("Advogados");
-
                     b.Navigation("Processos");
                 });
 
