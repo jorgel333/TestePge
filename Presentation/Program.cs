@@ -1,4 +1,3 @@
-
 using Infra.IoC;
 
 namespace Presentation
@@ -29,7 +28,6 @@ namespace Presentation
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

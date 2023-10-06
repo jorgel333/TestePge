@@ -1,5 +1,5 @@
 ﻿using Application.Behaviours;
-using Application.Features.AdvogadoFeatures.Cadastrar;
+using Application.Features.Advogados.Cadastrar;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

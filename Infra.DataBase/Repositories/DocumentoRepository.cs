@@ -14,13 +14,16 @@ public class DocumentoRepository : IDocumentoRepository
         _context = context;
     }
 
-    public void Anexar(IEnumerable<Documento> documentos)
-    {
-        throw new NotImplementedException();
-    }
+    public void Anexar(Documento documentos)
+        => _context.Add(documentos);
 
     public void Desanexar(IEnumerable<Documento> documentos)
-    {
-        throw new NotImplementedException();
-    }
+        => _context.Documentos.RemoveRange(documentos);
+
+    public async Task<IEnumerable<Documento>> BuscarDocumentos(int id, CancellationToken cancellationToken)
+        => await _context.Documentos.Where(x => x.ProcessoId == id).ToListAsync(cancellationToken);
+
+    public async Task<Documento?> BuscarDocumento(int id, CancellationToken cancellationToken)
+        => await _context.Documentos.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+    
 }

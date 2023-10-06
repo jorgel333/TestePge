@@ -1,4 +1,5 @@
-﻿using Infra.DataBase;
+﻿using Application;
+using Infra.DataBase;
 using Infra.DataBase.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ public static class DependencyInjection
             b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
 
         services.AddRepositories();
+        services.AddApplication();
 
         return services;
     }
