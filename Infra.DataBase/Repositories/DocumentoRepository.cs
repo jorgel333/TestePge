@@ -25,5 +25,5 @@ public class DocumentoRepository : IDocumentoRepository
 
     public async Task<Documento?> BuscarDocumento(int id, CancellationToken cancellationToken)
         => await _context.Documentos.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
-    
+
 }

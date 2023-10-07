@@ -1,5 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dtos;
 
 namespace Application.Features.Clientes.Buscar;
 
-public record BuscarClienteQueryResponse(string Nome, string Cpf, IEnumerable<ProcessoJudicial> Processos);
+public record BuscarClienteQueryResponse(int Id, string Nome, string Cpf, IEnumerable<ProcessoJudicialDto> Processos);

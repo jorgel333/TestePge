@@ -2,7 +2,7 @@
 using Application.Erros;
 using FluentResults;
 using MediatR;
-using Domain.Entities;
+using Application.Dtos;
 
 namespace Application.Features.Processos.BuscarDetalhes;
 
@@ -27,7 +27,7 @@ public class BuscarDetalhesProcessoQueryHandler : IRequestHandler<BuscarDetalhes
             processo.ValorCausa,
             processo.AdvogadoResponsavel!.Nome!,
             processo.Parte!.Nome!,
-            processo.Documentos!.Select(x => x.Nome!) ?? Enumerable.Empty<string>());
+            processo.Documentos!.Select(x => new DocumentoDto (x.Id, x.Nome)) ?? Enumerable.Empty<DocumentoDto>());
         
         return Result.Ok(response);
     }

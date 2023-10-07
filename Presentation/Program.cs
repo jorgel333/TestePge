@@ -1,4 +1,5 @@
 using Infra.IoC;
+using System.Text.Json.Serialization;
 
 namespace Presentation
 {

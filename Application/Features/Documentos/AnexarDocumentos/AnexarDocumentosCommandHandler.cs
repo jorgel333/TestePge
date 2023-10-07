@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Erros;
+using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using FluentResults;
@@ -19,6 +20,17 @@ public class AnexarDocumentosCommandHandler : IRequestHandler<AnexarDocumentosCo
 
     public async Task<Result> Handle(AnexarDocumentosCommand request, CancellationToken cancellationToken)
     {
+
+        var fileNames = request.Documentos.Select(file => file.FileName).ToList();
+
+        var duplicateFileNames = fileNames.GroupBy(fileName => fileName)
+                                          .Where(group => group.Count() > 1)
+                                          .Select(group => group.Key)
+                                          .ToList();
+
+        if (duplicateFileNames.Any())
+            return Result.Fail(new ApplicationError($"Os seguintes nomes de arquivo são duplicados: {string.Join(", ", duplicateFileNames)}"));
+        
         foreach (var formFile in request.Documentos)
         {
             if (formFile.Length > 0)

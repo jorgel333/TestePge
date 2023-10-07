@@ -22,7 +22,7 @@ public class ExcluirClienteCommandHandler : IRequestHandler<ExcluirClienteComman
         var cliente = await _clienteRepository.BuscarPorId(request.Id, cancellationToken);
 
         if (cliente is null)
-            return Result.Fail(new ApplicationNotFoundError("Advogado não encontrado"));
+            return Result.Fail(new ApplicationNotFoundError("Cliente não encontrado"));
 
         _clienteRepository.Excluir(cliente);
         await _unityOfWork.SaveChangesAsync(cancellationToken);

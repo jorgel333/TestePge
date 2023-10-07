@@ -1,4 +1,5 @@
-﻿using Application.Erros;
+﻿using Application.Dtos;
+using Application.Erros;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using FluentResults;
@@ -22,10 +23,10 @@ public class BuscarAdvogadoQueryHandler : IRequestHandler<BuscarAdvogadoQuery, R
         if (advogado is null)
             return Result.Fail(new ApplicationNotFoundError("Advogado não encontrado"));
 
-        var response = new BuscarAdvogadoQueryResponse(advogado.Nome!,
+        var response = new BuscarAdvogadoQueryResponse(advogado.Id, advogado.Nome!,
             advogado.Cpf!,
             advogado.Oab!,
-            advogado.Processos ?? Enumerable.Empty<ProcessoJudicial>());
+            advogado.Processos!.Select(x => new ProcessoJudicialDto(x.NumeroProcesso, x.Tema!, x.ValorCausa)) ?? Enumerable.Empty<ProcessoJudicialDto>());
 
         return Result.Ok(response);
     }

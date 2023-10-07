@@ -1,12 +1,9 @@
 ﻿using Application.Features.Documentos.AnexarDocumentos;
 using Application.Features.Documentos.Baixar;
 using Application.Features.Documentos.DesanexarDocumentos;
-using Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.PresentationUntils.ResponseDapter;
-using System.IO;
 
 namespace Presentation.Controllers
 {
@@ -21,7 +18,7 @@ namespace Presentation.Controllers
             _sender = sender;
         }
 
-        [HttpPost("id{id:int}/baixar-documento")]
+        [HttpGet("id{id:int}/baixar-documento")]
         public async Task<IActionResult> Baixar(int id, CancellationToken cancellationToken)
         {
             var request = new BaixarDocumentoQuery(id);
@@ -30,11 +27,10 @@ namespace Presentation.Controllers
             
         }
 
-        [HttpPost("{id:int}")]
-        public async Task<IActionResult> Anexar(int id, [FromForm] AnexarDocumentosCommandRequest request, CancellationToken cancellationToken)
+        [HttpPost]
+        public async Task<IActionResult> Anexar([FromForm] AnexarDocumentosCommand request, CancellationToken cancellationToken)
         {
-            var command = new AnexarDocumentosCommand(id, request.Documentos);
-            var result = await _sender.Send(command, cancellationToken);
+            var result = await _sender.Send(request, cancellationToken);
             return SendResponseService.SendResponse(result);
             
         }

@@ -1,4 +1,5 @@
-﻿using Application.Erros;
+﻿using Application.Dtos;
+using Application.Erros;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using FluentResults;
@@ -23,9 +24,10 @@ public class BuscarClienteQueryHandler : IRequestHandler<BuscarClienteQuery, Res
             return Result.Fail(new ApplicationNotFoundError("Cliente não encontrado"));
 
         var response = new BuscarClienteQueryResponse(
+            cliente.Id,
             cliente.Nome!,
             cliente.Cpf!,
-            cliente.Processos ?? Enumerable.Empty<ProcessoJudicial>());
+            cliente.Processos!.Select(x => new ProcessoJudicialDto(x.NumeroProcesso, x.Tema!, x.ValorCausa)) ?? Enumerable.Empty<ProcessoJudicialDto>());
 
         return Result.Ok(response);
     }
