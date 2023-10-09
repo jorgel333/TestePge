@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Infra.IoC\Infra.IoC.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Documentos\" />
-  </ItemGroup>
-
 </Project>
