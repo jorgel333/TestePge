@@ -26,7 +26,7 @@ public class BuscarAdvogadoQueryHandler : IRequestHandler<BuscarAdvogadoQuery, R
         var response = new BuscarAdvogadoQueryResponse(advogado.Id, advogado.Nome!,
             advogado.Cpf!,
             advogado.Oab!,
-            advogado.Processos!.Select(x => new ProcessoJudicialDto(x.NumeroProcesso, x.Tema!, x.ValorCausa, x.Parte!.Nome!)) ?? Enumerable.Empty<ProcessoJudicialDto>());
+            advogado.Processos!.Select(x => new ProcessoJudicialAdvogadoDto(x.NumeroProcesso, x.Tema!, x.ValorCausa, x.Parte!.Nome!)) ?? Enumerable.Empty<ProcessoJudicialAdvogadoDto>());
 
         return Result.Ok(response);
     }
