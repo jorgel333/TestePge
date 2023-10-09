@@ -34,4 +34,7 @@ public class ClienteRepository : IClienteRepository
 
     public async Task<bool> CpfUnico(string cpf, CancellationToken cancellatioToken)
            => await _context.Clientes.AnyAsync(adm => adm.Cpf! == cpf, cancellatioToken) is false;
+
+    public async Task<IEnumerable<Cliente>> BuscarTodos(CancellationToken cancellationToken)
+        => await _context.Clientes.ToListAsync(cancellationToken);
 }

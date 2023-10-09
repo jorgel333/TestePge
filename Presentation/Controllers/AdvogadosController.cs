@@ -1,4 +1,5 @@
 ﻿using Application.Features.Advogados.Buscar;
+using Application.Features.Advogados.BuscarTodos;
 using Application.Features.Advogados.Cadastrar;
 using Application.Features.Advogados.Editar;
 using Application.Features.Advogados.Excluir;
@@ -19,6 +20,14 @@ namespace Presentation.Controllers
             _sender = sender;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> BuscarTodos(CancellationToken cancellationToken)
+        {
+            var request = new BuscarTodosAdvogadosQuery();
+            var result = await _sender.Send(request, cancellationToken);
+            return SendResponseService.SendResponse(result);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> BuscarAdvogado(int id, CancellationToken cancellationToken)
         {
@@ -27,14 +36,14 @@ namespace Presentation.Controllers
             return SendResponseService.SendResponse(result);
         }
 
-        [HttpPost]
+        [HttpPost("cadastrar-advogado")]
         public async Task<IActionResult> CadastrarAdvogado(CadastrarAdvogadoCommand request, CancellationToken cancellationToken)
         {
             var result = await _sender.Send(request, cancellationToken);
             return SendResponseService.SendResponse(result);
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:int}/atualizar-advogado")]
         public async Task<IActionResult> AtualizarAdvogado(int id, AtualizarDadosAdvogadoCommandRequest request, CancellationToken cancellationToken)
         {
             var command = new AtualizarDadosAdvogadoCommand(id, request.Nome, request.Cpf, request.Oab);
@@ -42,7 +51,7 @@ namespace Presentation.Controllers
             return SendResponseService.SendResponse(result);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}/excluir-advogado")]
         public async Task<IActionResult> ExcluirAdvogado(int id, CancellationToken cancellationToken)
         {
             var request = new ExcluirAdvogadoCommand(id);

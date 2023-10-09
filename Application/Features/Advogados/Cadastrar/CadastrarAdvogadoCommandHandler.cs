@@ -20,7 +20,7 @@ public class CadastrarAdvogadoCommandHandler : IRequestHandler<CadastrarAdvogado
 
     public async Task<Result<CadastrarAdvogadoCommandResponse>> Handle(CadastrarAdvogadoCommand request, CancellationToken cancellationToken)
     {
-        var cpfUnico = await _advogadoRepository.CpfUnico(request.Cpf, cancellationToken);
+        var cpfUnico = await _advogadoRepository.CpfUnico(request.CpfAdvogado, cancellationToken);
         var oabUnico = await _advogadoRepository.OabUnico(request.Oab, cancellationToken);
 
         if (cpfUnico is false)
@@ -29,7 +29,7 @@ public class CadastrarAdvogadoCommandHandler : IRequestHandler<CadastrarAdvogado
         if (oabUnico is false)
             return Result.Fail(new ApplicationError("OAB já foi cadastrada"));
 
-        var advogado = new Advogado(request.Nome, request.Cpf, request.Oab);
+        var advogado = new Advogado(request.NomeAdvogado, request.CpfAdvogado, request.Oab);
 
         _advogadoRepository.Criar(advogado);
         await _unityOfWork.SaveChangesAsync(cancellationToken);

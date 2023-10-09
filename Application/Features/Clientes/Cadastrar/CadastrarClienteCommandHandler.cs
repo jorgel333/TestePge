@@ -19,12 +19,12 @@ public class CadastrarClienteCommandHandler : IRequestHandler<CadastrarClienteCo
 
     public async Task<Result<CadastrarClienteCommandResponse>> Handle(CadastrarClienteCommand request, CancellationToken cancellationToken)
     {
-        var cpfUnico = await _clienteRepository.CpfUnico(request.Cpf, cancellationToken);
+        var cpfUnico = await _clienteRepository.CpfUnico(request.CpfCliente, cancellationToken);
 
         if (cpfUnico is false)
             return Result.Fail(new ApplicationError("Cpf já cadastrado"));
 
-        var cliente = new Cliente(request.Nome, request.Cpf);
+        var cliente = new Cliente(request.NomeCliente, request.CpfCliente);
 
         _clienteRepository.Criar(cliente);
         await _unityOfWork.SaveChangesAsync(cancellationToken);

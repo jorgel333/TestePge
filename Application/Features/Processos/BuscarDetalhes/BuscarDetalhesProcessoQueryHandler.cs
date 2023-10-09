@@ -24,7 +24,8 @@ public class BuscarDetalhesProcessoQueryHandler : IRequestHandler<BuscarDetalhes
         
         var response = new BuscarDetalhesProcessoQueryResponse(processo.NumeroProcesso,
             processo.Tema!,
-            processo.ValorCausa,
+            processo.ValorCausa.ToString("F2"),
+            processo.Descricao,
             processo.AdvogadoResponsavel!.Nome!,
             processo.Parte!.Nome!,
             processo.Documentos!.Select(x => new DocumentoDto (x.Id, x.Nome)) ?? Enumerable.Empty<DocumentoDto>());

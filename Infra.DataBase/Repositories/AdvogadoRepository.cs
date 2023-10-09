@@ -34,8 +34,11 @@ public class AdvogadoRepository : IAdvogadoRepository
         => await _context.Advogados.AnyAsync(c => c.Id == id, cancellationToken) is false;
 
     public async Task<bool> CpfUnico(string cpf, CancellationToken cancellatioToken)
-             => await _context.Advogados.AnyAsync(adm => adm.Cpf! == cpf, cancellatioToken);
+             => await _context.Advogados.AnyAsync(adm => adm.Cpf! == cpf, cancellatioToken) is false;
 
     public async Task<bool> OabUnico(string oab, CancellationToken cancellatioToken)
-             => await _context.Advogados.AnyAsync(adm => adm.Oab! == oab, cancellatioToken);
+             => await _context.Advogados.AnyAsync(adm => adm.Oab! == oab, cancellatioToken) is false;
+
+    public async Task<IEnumerable<Advogado>> BuscarTodos(CancellationToken cancellationToken)
+        => await _context.Advogados.ToListAsync(cancellationToken);
 }

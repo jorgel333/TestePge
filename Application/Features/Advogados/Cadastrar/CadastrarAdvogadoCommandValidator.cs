@@ -6,10 +6,10 @@ public class CadastrarAdvogadoCommandValidator : AbstractValidator<CadastrarAdvo
 {
 	public CadastrarAdvogadoCommandValidator()
 	{
-		RuleFor(x => x.Nome).NotEmpty()
+		RuleFor(x => x.NomeAdvogado).NotEmpty()
 			.MaximumLength(120);
 
-		RuleFor(x => x.Cpf).NotEmpty()
+		RuleFor(x => x.CpfAdvogado).NotEmpty()
 			.Matches(@"^\d{11}$").WithMessage("O CPF deve conter 11 digitos númericos");
 
 		RuleFor(x => x.Oab).NotEmpty()

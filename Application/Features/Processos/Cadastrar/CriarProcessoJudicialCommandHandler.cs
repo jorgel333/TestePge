@@ -26,15 +26,15 @@ public class CriarProcessoJudicialCommandHandler : IRequestHandler<CriarProcesso
     {
         var clienteCadastrado = await _clienteRepository.ClienteCadastrado(request.ClienteId, cancellationToken);
 
-        if (clienteCadastrado is false)
+        if (clienteCadastrado)
             return Result.Fail(new ApplicationNotFoundError("Cliente não cadastrado"));
 
         var advogadoCadastrado = await _advogadoRepository.AdvogadoCadastrado(request.AdvogadoId, cancellationToken);
 
-        if (advogadoCadastrado is false)
+        if (advogadoCadastrado)
             return Result.Fail(new ApplicationNotFoundError("Advogado não cadastrado"));
 
-        var processo = new ProcessoJudicial(request.Tema, request.ValorCausa)
+        var processo = new ProcessoJudicial(request.Tema, request.ValorCausa, request.Descricao)
         {
             ClienteId = request.ClienteId,
             AdvogadoId = request.AdvogadoId

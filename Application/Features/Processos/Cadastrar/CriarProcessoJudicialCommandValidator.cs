@@ -6,9 +6,10 @@ public class CriarProcessoJudicialCommandValidator : AbstractValidator<CriarProc
 {
     public CriarProcessoJudicialCommandValidator()
     {
-        RuleFor(p => p.Tema).NotEmpty()
-            .MaximumLength(400);
+        RuleFor(p => p.Tema).NotEmpty().MaximumLength(100);
 
         RuleFor(p => p.ValorCausa).GreaterThan(0);
+
+        RuleFor(p => p.Descricao).NotEmpty().MaximumLength(400);
     }
 }

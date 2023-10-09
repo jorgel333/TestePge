@@ -7,6 +7,7 @@ using Application.Features.Advogados.Excluir;
 using Application.Features.Clientes.Excluir;
 using Application.Features.Clientes.Editar;
 using Application.Features.Clientes.Buscar;
+using Application.Features.Clientes.BuscarTodos;
 
 namespace Presentation.Controllers
 {
@@ -21,6 +22,14 @@ namespace Presentation.Controllers
             _sender = sender;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> BuscarTodos(CancellationToken cancellationToken)
+        {
+            var request = new BuscarTodosClientesQuery();
+            var result = await _sender.Send(request, cancellationToken);
+            return SendResponseService.SendResponse(result);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> BuscarCliente(int id, CancellationToken cancellationToken)
         {
@@ -29,14 +38,14 @@ namespace Presentation.Controllers
             return SendResponseService.SendResponse(result);
         }
 
-        [HttpPost]
+        [HttpPost("cadastrar-cliente")]
         public async Task<IActionResult> CadastrarCliente(CadastrarClienteCommand request, CancellationToken cancellationToken)
         {
             var result = await _sender.Send(request, cancellationToken);
             return SendResponseService.SendResponse(result);
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:int}/atualizar-cliente")]
         public async Task<IActionResult> AtualizarCliente(int id, AtualizarDadosAdvogadoCommandRequest request, CancellationToken cancellationToken)
         {
             var command = new AtualizarDadosClienteCommand(id, request.Nome, request.Cpf);
@@ -44,7 +53,7 @@ namespace Presentation.Controllers
             return SendResponseService.SendResponse(result);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}/exluir-cliente")]
         public async Task<IActionResult> ExcluirCliente(int id, CancellationToken cancellationToken)
         {
             var request = new ExcluirClienteCommand(id);

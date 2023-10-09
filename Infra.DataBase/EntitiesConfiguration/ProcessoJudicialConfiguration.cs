@@ -14,6 +14,8 @@ public class ProcessoJudicialConfiguration : IEntityTypeConfiguration<ProcessoJu
 
         builder.Property(j => j.ValorCausa).HasPrecision(8, 2);
 
+        builder.Property(j => j.Descricao).IsRequired().HasMaxLength(400);
+
         builder.HasOne(j => j.Parte).WithMany(j => j.Processos).HasForeignKey(j => j.ClienteId);
 
         builder.HasOne(j => j.AdvogadoResponsavel).WithMany(j => j.Processos).HasForeignKey(j => j.AdvogadoId);

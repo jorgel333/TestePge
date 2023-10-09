@@ -34,8 +34,8 @@ public class ProcessoJudicialRepository : IProcessoJudicialRepository
         => await _context.ProcessosJudiciais
         .SingleOrDefaultAsync(x => x.NumeroProcesso == numeroProcesso, cancellationToken);
 
-    public Task<IEnumerable<ProcessoJudicial>> GetAll(CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+
+    public async Task<IEnumerable<ProcessoJudicial>> BuscarTodosProcessos(CancellationToken cancellationToken)
+        => await _context.ProcessosJudiciais.ToListAsync(cancellationToken);
+    
 }

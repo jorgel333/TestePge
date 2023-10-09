@@ -4,7 +4,8 @@ namespace Application.Features.Processos.BuscarDetalhes;
 
 public record BuscarDetalhesProcessoQueryResponse(int NumeroProcesso, 
     string Tema, 
-    double ValorCausa, 
+    string ValorCausa,
+    string Descricao,
     string AdvogadoResponsavel,
     string Parte,
     IEnumerable<DocumentoDto> Documentos);
