@@ -28,7 +28,8 @@ public class AdvogadoRepository : IAdvogadoRepository
         => await _context.Advogados.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
     public async Task<Advogado?> BuscarDetalhes(int id, CancellationToken cancellationToken)
-        => await _context.Advogados.Include(x => x.Processos!).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+        => await _context.Advogados.Include(x => x.Processos!).ThenInclude(x => x.Parte)
+        .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
     public async Task<bool> AdvogadoCadastrado(int id, CancellationToken cancellationToken)
         => await _context.Advogados.AnyAsync(c => c.Id == id, cancellationToken) is false;

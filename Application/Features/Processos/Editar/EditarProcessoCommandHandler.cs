@@ -24,7 +24,7 @@ public class EditarProcessoCommandHandler : IRequestHandler<EditarProcessoComman
         if (processo is null)
             return Result.Fail(new ApplicationNotFoundError("Processo não encontrado"));
 
-        processo.AtualizarDados(request.Tema, request.ValorCausa);        
+        processo.AtualizarDados(request.Tema, request.ValorCausa, request.Descricao, request.AdvogadoId);        
         _processoRepository.Atualizar(processo);
         await _unityOfWork.SaveChangesAsync(cancellationToken);
 

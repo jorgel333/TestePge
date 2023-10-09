@@ -28,11 +28,13 @@ public class AtualizarDadosAdvogadoCommandHandler : IRequestHandler<AtualizarDad
         var cpfUnico = await _advogadoRepository.CpfUnico(request.Cpf, cancellationToken);
         var oabUnico = await _advogadoRepository.OabUnico(request.Oab, cancellationToken);
 
-        if (cpfUnico is false)
-            return Result.Fail(new ApplicationError("Cpf já cadastrado"));
+        if (advogado.Cpf != request.Cpf)
+            if (cpfUnico is false)
+                return Result.Fail(new ApplicationError("Cpf já cadastrado"));
 
-        if (oabUnico is false)
-            return Result.Fail(new ApplicationError("OAB já foi cadastrada"));
+        if (advogado.Oab != request.Oab)
+            if (oabUnico is false)
+                return Result.Fail(new ApplicationError("OAB já foi cadastrada"));
 
         advogado.AtualizarDados(request.Nome, request.Cpf, request.Oab);
         _advogadoRepository.Atualizar(advogado);

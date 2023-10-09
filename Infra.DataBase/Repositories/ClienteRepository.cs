@@ -27,7 +27,8 @@ public class ClienteRepository : IClienteRepository
         => await _context.Clientes.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
     public async Task<Cliente?> BuscarDetalhes(int id, CancellationToken cancellationToken)
-        => await _context.Clientes.Include(x => x.Processos!).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+        => await _context.Clientes.Include(x => x.Processos!).ThenInclude(x => x.AdvogadoResponsavel)
+        .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
     public async Task<bool> ClienteCadastrado(int id, CancellationToken cancellationToken)
         => await _context.Clientes.AnyAsync(c => c.Id == id, cancellationToken) is false;

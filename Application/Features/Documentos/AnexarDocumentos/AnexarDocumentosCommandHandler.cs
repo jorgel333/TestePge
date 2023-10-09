@@ -35,7 +35,7 @@ public class AnexarDocumentosCommandHandler : IRequestHandler<AnexarDocumentosCo
         {
             if (formFile.Length > 0)
             {
-                var caminho = Path.Combine(@"C:\Users\Usuário\source\repos\TestePge\Infra.DataBase\Storage", formFile.FileName);
+                var caminho = Path.Combine(Directory.GetCurrentDirectory(), "Documentos", formFile.FileName);
 
                 using var stream = new FileStream(caminho, FileMode.Create);
                 {

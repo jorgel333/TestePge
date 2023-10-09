@@ -11,7 +11,7 @@ public static class SendResponseService
     {
         if (result.IsSuccess)
         {
-            var caminho = Path.Combine(@"C:\Users\Usuário\source\repos\TestePge\Infra.DataBase\Storage", result.Value.Documento.Nome!);
+            var caminho = Path.Combine(Directory.GetCurrentDirectory(), "Documentos", result.Value.Documento.Nome!);
             var memory = new MemoryStream();
             using var stream = new FileStream(caminho, FileMode.Open);
             stream.CopyTo(memory);

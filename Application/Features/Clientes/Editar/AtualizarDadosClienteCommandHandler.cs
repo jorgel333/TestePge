@@ -26,8 +26,9 @@ public class AtualizarDadosClienteCommandHandler : IRequestHandler<AtualizarDado
         
         var cpfUnico = await _clienteRepository.CpfUnico(request.Cpf, cancellationToken);
 
-        if (cpfUnico is false)
-            return Result.Fail(new ApplicationError("Cpf já cadastrado"));
+        if (cliente.Cpf != request.Cpf)
+            if (cpfUnico is false)
+                return Result.Fail(new ApplicationError("Cpf já cadastrado"));
 
         cliente.AtualizarDados(request.Nome, request.Cpf);
         _clienteRepository.Atualizar(cliente);

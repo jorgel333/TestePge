@@ -25,9 +25,11 @@ public class ProcessoJudicial
         Descricao = descricao;
     }
 
-    public void AtualizarDados(string tema, double valorCausa)
+    public void AtualizarDados(string tema, double valorCausa, string descricao, int advogadoId)
     {
         Tema = tema;
         ValorCausa = valorCausa;
+        Descricao = descricao;
+        AdvogadoId = advogadoId;
     }
 }

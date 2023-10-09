@@ -46,7 +46,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("{id:int}/atualizar-cliente")]
-        public async Task<IActionResult> AtualizarCliente(int id, AtualizarDadosAdvogadoCommandRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> AtualizarCliente(int id, AtualizarDadosClienteCommandRequest request, CancellationToken cancellationToken)
         {
             var command = new AtualizarDadosClienteCommand(id, request.Nome, request.Cpf);
             var result = await _sender.Send(command, cancellationToken);

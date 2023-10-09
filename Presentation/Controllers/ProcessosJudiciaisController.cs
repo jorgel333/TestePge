@@ -46,7 +46,7 @@ namespace Presentation.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Atualizar(int id, EditarProcessoCommandRequest request, CancellationToken cancellationToken)
         {
-            var command = new EditarProcessoCommand(id, request.Tema, request.ValorCausa);
+            var command = new EditarProcessoCommand(id, request.Tema, request.ValorCausa, request.Descricao, request.AdvogadoId);
             var result = await _sender.Send(command, cancellationToken);
             return SendResponseService.SendResponse(result);
         }

@@ -11,15 +11,12 @@ public class DesanexarDocumentoCommandHandler : IRequestHandler<DesanexarDocumen
     public readonly IDocumentoRepository _documentoRepository;
     private readonly IUnityOfWork _unityOfWork;
 
-    public DesanexarDocumentoCommandHandler(IDocumentoRepository documentoRepository, IUnityOfWork unityOfWork) : this(documentoRepository)
+    public DesanexarDocumentoCommandHandler(IDocumentoRepository documentoRepository, IUnityOfWork unityOfWork) 
     {
+        _documentoRepository = documentoRepository;
         _unityOfWork = unityOfWork;
     }
 
-    public DesanexarDocumentoCommandHandler(IDocumentoRepository documentoRepository)
-    {
-        _documentoRepository = documentoRepository;
-    }
 
     public async Task<Result> Handle(DesanexarDocumentoCommand request, CancellationToken cancellationToken)
     {
@@ -28,7 +25,7 @@ public class DesanexarDocumentoCommandHandler : IRequestHandler<DesanexarDocumen
         if (documento is null)
             return Result.Fail(new ApplicationNotFoundError("Documento não encontrado"));
 
-        var caminho = Path.Combine(@"C:\Users\Usuário\source\repos\TestePge\Infra.DataBase\Storage", documento.Nome!);
+        var caminho = Path.Combine(Directory.GetCurrentDirectory(), "Documentos", documento.Nome!);
 
         if (File.Exists(caminho))
             File.Delete(caminho);

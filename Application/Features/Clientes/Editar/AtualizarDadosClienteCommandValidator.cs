@@ -7,7 +7,7 @@ public class AtualizarDadosClienteCommandValidator : AbstractValidator<Atualizar
     public AtualizarDadosClienteCommandValidator()
     {
         RuleFor(x => x.Nome).NotEmpty()
-            .MaximumLength(120);
+            .MaximumLength(100);
 
         RuleFor(x => x.Cpf).NotEmpty()
             .Matches(@"^\d{11}$").WithMessage("O CPF deve conter 11 digitos númericos");
