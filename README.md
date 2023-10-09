@@ -6,7 +6,7 @@ Este projeto foi desenvolvido utilizando a versão 7.0 do .NET e segue a arquite
 Nesta camada, você encontrará o modelo de domínio da aplicação, que define as entidades e regras de negócios além do diagrama de classes.
 
 ## Infra.DataBase
-Esta camada lida com todas as operações relacionadas ao banco de dados, incluindo persistência de dados. Foi implementado o padrão Repository e Unity of Work, e o Entity Framework foi utilizado como ORM (Object-Relational Mapping).
+Esta camada lida com todas as operações relacionadas ao banco de dados, incluindo persistência de dados. Foi implementado o padrão Repository e Unity of Work, e o Entity Framework foi utilizado como ORM (Object-Relational Mapping). O Banco de dados usado foi o SQL Server.
 
 ## Infra.IoC
 Aqui, é aplicado o princípio de Inversão de Controle (IoC - Inversion of Control), permitindo uma melhor gerência das dependências da aplicação.
@@ -26,6 +26,6 @@ Para executar o projeto, siga os passos abaixo:
 
 3. Defina a camada `Application` como o projeto de inicialização.
 
-4. Ao executar a aplicação, o banco de dados será populado automaticamente.
+4. Ao executar a aplicação pela primeira vez, o banco de dados será populado automaticamente. Exceto dados de documentos, isso vc terá que upar pelo endpoint
 
 Certifique-se de que todas as dependências estejam instaladas corretamente antes de executar o projeto.
