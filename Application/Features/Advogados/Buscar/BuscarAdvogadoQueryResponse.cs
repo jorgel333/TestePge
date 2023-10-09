@@ -3,4 +3,4 @@ using Domain.Entities;
 
 namespace Application.Features.Advogados.Buscar;
 
-public record BuscarAdvogadoQueryResponse (int Id, string Nome, string Cpf, string Oab, IEnumerable<ProcessoJudicialAdvogadoDto> Processos);
+public record BuscarAdvogadoQueryResponse (int Id, string Nome, string Cpf, string Oab, IEnumerable<ProcessoJudicialDto> Processos);
