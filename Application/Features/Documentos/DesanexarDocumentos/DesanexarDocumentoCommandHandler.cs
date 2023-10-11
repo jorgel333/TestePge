@@ -16,8 +16,6 @@ public class DesanexarDocumentoCommandHandler : IRequestHandler<DesanexarDocumen
         _documentoRepository = documentoRepository;
         _unityOfWork = unityOfWork;
     }
-
-
     public async Task<Result> Handle(DesanexarDocumentoCommand request, CancellationToken cancellationToken)
     {
         var documento = await _documentoRepository.BuscarDocumento(request.Id, cancellationToken);
