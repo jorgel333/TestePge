@@ -73,9 +73,9 @@ namespace Infra.DataBase.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Caminho = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Tipo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: false),
+                    Caminho = table.Column<string>(type: "nvarchar(220)", maxLength: 220, nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     NumeroProcesso = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
