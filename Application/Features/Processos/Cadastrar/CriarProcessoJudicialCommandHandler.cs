@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Processos.Cadastrar;
 
-public class CriarProcessoJudicialCommandHandler : IRequestHandler<CriarProcessoJudicialCommand, Result>
+public class CriarProcessoJudicialCommandHandler : IRequestHandler<CriarProcessoJudicialCommand, Result<CriarProcessoJudicialCommandResponse>>
 {
     private readonly IProcessoJudicialRepository _processoRepository;
     private readonly IAdvogadoRepository _advogadoRepository;
@@ -22,7 +22,7 @@ public class CriarProcessoJudicialCommandHandler : IRequestHandler<CriarProcesso
         _clienteRepository = clienteRepository;
     }
 
-    public async Task<Result> Handle(CriarProcessoJudicialCommand request, CancellationToken cancellationToken)
+    public async Task<Result<CriarProcessoJudicialCommandResponse>> Handle(CriarProcessoJudicialCommand request, CancellationToken cancellationToken)
     {
         var clienteCadastrado = await _clienteRepository.ClienteCadastrado(request.ClienteId, cancellationToken);
 
@@ -42,6 +42,6 @@ public class CriarProcessoJudicialCommandHandler : IRequestHandler<CriarProcesso
 
         _processoRepository.Criar(processo);
         await _unityOfWork.SaveChangesAsync(cancellationToken);
-        return Result.Ok();
+        return Result.Ok(new CriarProcessoJudicialCommandResponse(processo.NumeroProcesso));
     }
 }
