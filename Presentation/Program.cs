@@ -1,5 +1,6 @@
 using Infra.DataBase.Context;
 using Infra.IoC;
+using Presentation.Extensions;
 using System.Text.Json.Serialization;
 
 namespace Presentation
@@ -16,7 +17,7 @@ namespace Presentation
             builder.Services.AddInfrastructure(builder.Configuration);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwagger();
             builder.Services.AddCors();
             builder.Services.AddScoped<SeedingService>();
                 
