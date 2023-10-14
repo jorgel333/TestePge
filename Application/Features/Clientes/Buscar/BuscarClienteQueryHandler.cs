@@ -27,7 +27,7 @@ public class BuscarClienteQueryHandler : IRequestHandler<BuscarClienteQuery, Res
             cliente.Id,
             cliente.Nome!,
             cliente.Cpf!,
-            cliente.Processos!.Select(x => new ProcessoJudicialDto(x.NumeroProcesso, x.Tema!, x.ValorCausa, x.AdvogadoResponsavel!.Nome!)) ?? Enumerable.Empty<ProcessoJudicialDto>());
+            cliente.Processos!.Select(x => new ProcessoJudicialClienteDto(x.NumeroProcesso, x.Tema!, x.ValorCausa, x.AdvogadoResponsavel!.Nome!)) ?? Enumerable.Empty<ProcessoJudicialClienteDto>());
 
         return Result.Ok(response);
     }
