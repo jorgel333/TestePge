@@ -1,9 +1,9 @@
-﻿using Application.Features.Documentos.AnexarDocumentos;
-using Application.Features.Documentos.Baixar;
-using Application.Features.Documentos.DesanexarDocumentos;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Application.Features.Documentos.DesanexarDocumentos;
+using Application.Features.Documentos.AnexarDocumentos;
 using Presentation.PresentationUntils.ResponseDapter;
+using Application.Features.Documentos.Baixar;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
 
 namespace Presentation.Controllers
 {
@@ -19,24 +19,23 @@ namespace Presentation.Controllers
         }
 
         /// <summary>
-        /// Buscar um documento e disponibilizar para baixar
+        /// Buscar um documento e disponibilizar caminho para vizualização
         /// </summary>
         /// <param name="id">Número identificador do documento anexado</param>
         /// <param name="cancellationToken"></param>
         /// <response code="200">Success</response>
         /// <response code="404">NotFound</response>
         /// <response code="500">InternalServerError</response>
-        /// <returns>Link para download</returns>
-        [HttpGet("id{id:int}/baixar-documento")]
+        /// <returns>Caminho para vizualizar arquivo no navegador</returns>
+        [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Baixar(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Vizualizar(int id, CancellationToken cancellationToken)
         {
             var request = new BaixarDocumentoQuery(id);
             var result = await _sender.Send(request, cancellationToken);
             return SendResponseService.SendDownloadResponse(result);
-            
         }
 
         /// <summary>

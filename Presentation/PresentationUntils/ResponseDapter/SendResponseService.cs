@@ -12,15 +12,10 @@ public static class SendResponseService
         if (result.IsSuccess)
         {
             var caminho = Path.Combine(Directory.GetCurrentDirectory(), "Documentos", result.Value.Documento.Nome!);
-            var memory = new MemoryStream();
-            using var stream = new FileStream(caminho, FileMode.Open);
-            stream.CopyTo(memory);
-            memory.Position = 0;
+            
+            var dataBytes = System.IO.File.ReadAllBytes(caminho);
 
-            return new FileStreamResult(memory, result.Value.Documento.Tipo!)
-            {
-                FileDownloadName = result.Value.Documento.Nome
-            };
+            return new FileContentResult(dataBytes, result.Value.Documento.Tipo!);
         }
 
         return HandleError(result.ToResult());
